@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0c2d45">
+  <title>KNOTS AW26</title>
+  <style>
+    @font-face {
+      font-family: 'WCManoNegraBta';
+      src: url('fonts/WCManoNegraBta.otf') format('opentype');
+      font-weight: normal;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AlteHaasGrotesk';
+      src: url('fonts/AlteHaasGroteskBold.ttf') format('truetype');
+      font-weight: 700;
+      font-display: block;
+    }
+    @font-face {
+      font-family: 'AlteHaasGrotesk';
+      src: url('fonts/AlteHaasGroteskRegular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: block;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: #0c2d45;
+      background-image: url('https://kommodo.ai/i/It7gtOYRZ365sq4GcNkd');
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: #fff;
+      height: 100dvh;
+      overflow: hidden;
+      overscroll-behavior: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      padding-left: env(safe-area-inset-left, 0px);
+    }
+
+    @media (min-width: 768px) {
+      body {
+        background-image: url('https://kommodo.ai/i/KX9WQpGvKUuRVs9DVqX5');
+      }
+    }
+
+    /* ── Container ── */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 680px;
+      padding: 0 28px;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      width: 62px;
+      height: auto;
+      margin-bottom: 18px;
+    }
+    @media (min-width: 768px) {
+      .logo { width: 84px; margin-bottom: 22px; }
+    }
+
+    /* ── AW26 ── */
+    .title {
+      font-family: 'WCManoNegraBta', serif;
+      font-size: clamp(88px, 14vw, 160px);
+      line-height: 0.9;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    /* ── Countdown ── */
+    .countdown {
+      display: flex;
+      gap: clamp(18px, 5vw, 64px);
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: clamp(36px, 6vh, 60px);
+    }
+
+    .countdown-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .countdown-number {
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(42px, 7vw, 80px);
+      line-height: 1;
+      min-width: 2.2ch;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(9px, 1.1vw, 12px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    /* Flip animation */
+    @keyframes flipOut {
+      0%   { transform: perspective(400px) rotateX(0deg);   opacity: 1; }
+      100% { transform: perspective(400px) rotateX(-90deg); opacity: 0; }
+    }
+    @keyframes flipIn {
+      0%   { transform: perspective(400px) rotateX(90deg);  opacity: 0; }
+      100% { transform: perspective(400px) rotateX(0deg);   opacity: 1; }
+    }
+    .flip-out { animation: flipOut 0.17s ease-in  forwards; }
+    .flip-in  { animation: flipIn  0.17s ease-out forwards; }
+
+    /* ── Early Access ── */
+    .early-access {
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(13px, 1.8vw, 18px);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    /* ── Form row ── */
+    .form-row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 510px;
+      margin-bottom: 14px;
+    }
+
+    .phone-input {
+      flex: 1;
+      height: 58px;
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      border-radius: 14px;
+      background: rgba(28, 75, 108, 0.52);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      color: #fff;
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 18px;
+      outline: none;
+      touch-action: manipulation;
+      -webkit-appearance: none;
+      appearance: none;
+      min-width: 0;
+    }
+
+    .phone-input::placeholder {
+      color: rgba(255, 255, 255, 0.48);
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+    }
+
+    .phone-input:focus {
+      border-color: rgba(255, 255, 255, 0.9);
+      background: rgba(28, 75, 108, 0.68);
+    }
+
+    .submit-btn {
+      height: 58px;
+      padding: 0 22px;
+      flex-shrink: 0;
+      border: none;
+      border-radius: 14px;
+      background: #fff;
+      color: #0c2d45;
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      touch-action: manipulation;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .submit-btn:active { opacity: 0.78; }
+    .submit-btn:disabled { opacity: 0.55; cursor: default; }
+
+    /* ── Status line ── */
+    .status {
+      font-family: 'AlteHaasGrotesk', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-height: 16px;
+    }
+    .status.success { color: #7dd3d3; }
+    .status.error   { color: #ff8f8f; }
+
+    /* ── Page-load fade-up ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .fu { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+    .fu-1 { animation-delay: 0.05s; }
+    .fu-2 { animation-delay: 0.15s; }
+    .fu-3 { animation-delay: 0.27s; }
+    .fu-4 { animation-delay: 0.42s; }
+    .fu-5 { animation-delay: 0.54s; }
+    .fu-6 { animation-delay: 0.64s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <svg class="logo fu fu-1" viewBox="0 0 367.13 323.71" xmlns="http://www.w3.org/2000/svg" fill="white" aria-label="KNOTS logo">
+      <path d="M.44,163.08c21.21,10.31,43.86,13.7,66.91,6.72,11.09-3.36,21.37-8.44,30.62-15.37,11.55-8.66,20.37-19.87,26.53-32.87,9.03-19.06,11.16-40.51,6.02-60.93-6.84-27.14-25.65-49.07-51.86-59.98,9.25-1.3,18.36-.56,27.45,1.46,20.12,4.48,38.4,14.98,52.45,30.04,12.32,23.21,20.44,29.22,24.51,47.23,6.8-24.46,19.39-43.79,40.09-58.74,17.04-12.31,37.25-19.3,58.69-19.25-18.22,9.8-32.49,23.17-41.46,41.78-4.34,9-7.17,18.29-8.7,28.2-2.79,18.01.32,36.04,8.66,52.2,8.12,15.74,19.68,28.62,35.41,37.03,11.63,6.22,24.23,9.9,37.46,10.93,19.35,1.51,37.16-3.82,53.92-13.71-13.13,22.42-34.29,37.34-58.89,44.57-18.8,5.53-37.48,4.98-56.7-.33,31.7,37.23,36.16,77.36,14.66,121.11-.18.63-.58.78-.54.07.89-25-6.2-47.59-23.01-65.93-19.95-21.77-44.67-31.37-74.23-28.58-19.6,1.85-37.61,10.18-51.88,23.65l-4.43,4.42c-16.64,16.6-25.67,41.19-24.96,65.36-3.66-5.6-6.21-11.61-7.99-17.89-10.2-36.1-.47-74.58,26.1-101.65-43.53,8.01-77.82-4.83-104.97-39.11l-.26-.32-.02-.44.44.32ZM207.7,175.59c-12.98-13.97-21.39-30.21-25.66-48.96-4.94,18.18-13.88,34.11-27.26,47.79,18.01-3.97,35.37-3.67,52.92,1.17Z"/>
+    </svg>
+
+    <div class="title fu fu-2">AW26</div>
+
+    <div class="countdown fu fu-3">
+      <div class="countdown-col">
+        <div class="countdown-number" id="days">00</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-col">
+        <div class="countdown-number" id="hours">00</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-col">
+        <div class="countdown-number" id="minutes">00</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-col">
+        <div class="countdown-number" id="seconds">00</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+
+    <div class="early-access fu fu-4">Early Access</div>
+
+    <div class="form-row fu fu-5">
+      <input
+        type="tel"
+        class="phone-input"
+        id="phoneInput"
+        placeholder="PHONE NUMBER"
+        inputmode="tel"
+        autocomplete="tel"
+        autocorrect="off"
+        autocapitalize="off"
+      >
+      <button class="submit-btn" id="submitBtn">Submit</button>
+    </div>
+
+    <div class="status fu fu-6" id="status"></div>
+
+  </div>
+
+  <script>
+    // Block pull-to-refresh / rubber-band, allow input scrolling
+    document.addEventListener('touchmove', function(e) {
+      if (!e.target.closest('input, textarea')) e.preventDefault();
+    }, { passive: false });
+
+    // ── Countdown ──────────────────────────────────────────────
+    const TARGET = new Date('2026-07-27T00:00:00Z').getTime();
+    const els = {
+      days:    document.getElementById('days'),
+      hours:   document.getElementById('hours'),
+      minutes: document.getElementById('minutes'),
+      seconds: document.getElementById('seconds'),
+    };
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function flipTo(el, val) {
+      if (el.textContent === val) return;
+      el.classList.remove('flip-in', 'flip-out');
+      void el.offsetWidth;
+      el.classList.add('flip-out');
+      setTimeout(function() {
+        el.textContent = val;
+        el.classList.remove('flip-out');
+        void el.offsetWidth;
+        el.classList.add('flip-in');
+      }, 170);
+    }
+
+    function tick() {
+      var diff = Math.max(0, TARGET - Date.now());
+      flipTo(els.days,    pad(Math.floor(diff / 86400000)));
+      flipTo(els.hours,   pad(Math.floor((diff % 86400000) / 3600000)));
+      flipTo(els.minutes, pad(Math.floor((diff % 3600000)  / 60000)));
+      flipTo(els.seconds, pad(Math.floor((diff % 60000)    / 1000)));
+    }
+
+    tick();
+    setInterval(tick, 1000);
+
+    // ── Form ───────────────────────────────────────────────────
+    var phoneInput = document.getElementById('phoneInput');
+    var submitBtn  = document.getElementById('submitBtn');
+    var statusEl   = document.getElementById('status');
+
+    function submit() {
+      var phone = phoneInput.value.trim();
+      if (!phone) {
+        statusEl.textContent = 'Please enter your phone number.';
+        statusEl.className = 'status error fu fu-6';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      statusEl.textContent = '';
+      statusEl.className = 'status fu fu-6';
+
+      fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone }),
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.success) {
+            statusEl.textContent = "You're on the list.";
+            statusEl.className = 'status success fu fu-6';
+            phoneInput.value = '';
+          } else {
+            statusEl.textContent = data.error || 'Something went wrong.';
+            statusEl.className = 'status error fu fu-6';
+          }
+        })
+        .catch(function() {
+          statusEl.textContent = 'Connection error. Please try again.';
+          statusEl.className = 'status error fu fu-6';
+        })
+        .finally(function() {
+          submitBtn.disabled = false;
+        });
+    }
+
+    submitBtn.addEventListener('click', submit);
+    phoneInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') submit();
+    });
+  </script>
+</body>
+</html>
