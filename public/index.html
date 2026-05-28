@@ -347,15 +347,15 @@
     tick();
     setInterval(tick, 1000);
 
-    // ── Align AW26 width to countdown width ────────────────────
+    // ── Stretch AW26 to match countdown width ──────────────────
     function alignTitle() {
-      var title    = document.querySelector('.title');
+      var title     = document.querySelector('.title');
       var countdown = document.querySelector('.countdown');
       if (!title || !countdown) return;
-      title.style.letterSpacing = '';
-      var diff = countdown.offsetWidth - title.offsetWidth;
-      if (diff > 1) {
-        title.style.letterSpacing = (diff / 4).toFixed(2) + 'px';
+      title.style.transform = '';
+      var scale = countdown.offsetWidth / title.offsetWidth;
+      if (scale > 1) {
+        title.style.transform = 'scaleX(' + scale.toFixed(4) + ')';
       }
     }
     document.fonts.ready.then(function() {
