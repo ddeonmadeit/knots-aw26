@@ -50,19 +50,10 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html {
+    html, body {
       height: 100%;
-      background-color: #0c2d45;
-      background-image: url('bg-mobile.png');
-      background-size: cover;
-      background-position: center center;
-      background-attachment: scroll;
-    }
-
-    @media (min-width: 768px) {
-      html {
-        background-image: url('bg-desktop.png');
-      }
+      margin: 0;
+      padding: 0;
     }
 
     body {
@@ -70,6 +61,7 @@
       overflow: hidden;
       overscroll-behavior: none;
       color: #fff;
+      background: #0c2d45;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -77,7 +69,27 @@
       padding-right: env(safe-area-inset-right, 0px);
       padding-bottom: env(safe-area-inset-bottom, 0px);
       padding-left: env(safe-area-inset-left, 0px);
-      background: transparent;
+    }
+
+    /* Real fixed element — most reliable bg approach on iOS Safari */
+    #bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #0c2d45;
+      background-image: url('bg-mobile.png');
+      background-size: cover;
+      background-position: center center;
+      z-index: 0;
+    }
+
+    @media (min-width: 768px) {
+      #bg { background-image: url('bg-desktop.png'); }
+    }
+
+    /* Lift everything above the bg layer */
+    #preloader, .container {
+      position: relative;
+      z-index: 1;
     }
 
     /* ── Container ── */
@@ -286,6 +298,7 @@
   </style>
 </head>
 <body>
+  <div id="bg"></div>
   <div id="preloader">
     <img src="preloader.gif" alt="">
   </div>
