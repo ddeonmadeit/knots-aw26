@@ -249,6 +249,29 @@
     .status.success { color: #7dd3d3; }
     .status.error   { color: #ff8f8f; }
 
+    /* ── Preloader ── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #0c2d45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: opacity 0.5s ease;
+    }
+    #preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #preloader img {
+      width: 120px;
+      height: auto;
+    }
+    #preloader img[src="preloader.gif"]:not([complete]) {
+      display: none;
+    }
+
     /* ── Page-load fade-up ── */
     @keyframes fadeUp {
       from { opacity: 0; translate: 0 20px; }
@@ -265,6 +288,10 @@
   </style>
 </head>
 <body>
+  <div id="preloader">
+    <img src="preloader.gif" alt="">
+  </div>
+
   <div class="container">
 
     <svg class="logo fu fu-1" viewBox="0 0 367.13 323.71" xmlns="http://www.w3.org/2000/svg" fill="white" aria-label="KNOTS logo">
@@ -313,6 +340,35 @@
   </div>
 
   <script>
+    // ── Preloader ──────────────────────────────────────────────
+    var preloader = document.getElementById('preloader');
+
+    function hidePreloader() {
+      alignTitle();
+      preloader.classList.add('fade-out');
+      setTimeout(function() { preloader.style.display = 'none'; }, 520);
+    }
+
+    function waitForImage(src) {
+      return new Promise(function(resolve) {
+        var img = new Image();
+        img.onload = img.onerror = resolve;
+        img.src = src;
+      });
+    }
+
+    Promise.all([
+      document.fonts.ready,
+      waitForImage('bg-mobile.png'),
+      waitForImage('bg-desktop.png'),
+      waitForImage('preloader.gif')
+    ]).then(function() {
+      setTimeout(hidePreloader, 300);
+    });
+
+    // Fallback: hide after 4s no matter what
+    setTimeout(hidePreloader, 4000);
+
     // Block pull-to-refresh / rubber-band, allow input scrolling
     document.addEventListener('touchmove', function(e) {
       if (!e.target.closest('input, textarea')) e.preventDefault();
