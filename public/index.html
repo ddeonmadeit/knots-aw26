@@ -56,9 +56,6 @@
 
     body {
       background-color: #0c2d45;
-      background-image: url('bg-mobile.png');
-      background-size: cover;
-      background-position: center center;
       color: #fff;
       height: 100dvh;
       overflow: hidden;
@@ -72,8 +69,19 @@
       padding-left: env(safe-area-inset-left, 0px);
     }
 
+    /* Fixed background covers full viewport including safe areas on iOS */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('bg-mobile.png');
+      background-size: cover;
+      background-position: center center;
+      z-index: -1;
+    }
+
     @media (min-width: 768px) {
-      body {
+      body::before {
         background-image: url('bg-desktop.png');
       }
     }
