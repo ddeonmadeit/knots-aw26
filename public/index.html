@@ -348,6 +348,23 @@
     tick();
     setInterval(tick, 1000);
 
+    // ── Align AW26 width to countdown width ────────────────────
+    function alignTitle() {
+      var title    = document.querySelector('.title');
+      var countdown = document.querySelector('.countdown');
+      if (!title || !countdown) return;
+      title.style.letterSpacing = '';
+      var diff = countdown.offsetWidth - title.offsetWidth;
+      if (diff > 1) {
+        title.style.letterSpacing = (diff / 4).toFixed(2) + 'px';
+      }
+    }
+    document.fonts.ready.then(function() {
+      alignTitle();
+      setTimeout(alignTitle, 150);
+    });
+    window.addEventListener('resize', alignTitle);
+
     // ── Form ───────────────────────────────────────────────────
     var phoneInput = document.getElementById('phoneInput');
     var submitBtn  = document.getElementById('submitBtn');
