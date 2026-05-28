@@ -258,18 +258,16 @@
       align-items: center;
       justify-content: center;
       z-index: 999;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease;
     }
     #preloader.fade-out {
       opacity: 0;
       pointer-events: none;
     }
     #preloader img {
-      width: 120px;
+      width: 140px;
       height: auto;
-    }
-    #preloader img[src="preloader.gif"]:not([complete]) {
-      display: none;
+      filter: invert(1);
     }
 
     /* ── Page-load fade-up ── */
